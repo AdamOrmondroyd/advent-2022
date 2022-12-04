@@ -93,7 +93,6 @@ program day2a
     do
 
         read(1,*,end=101)a,x
-        print *,a,x
         total_score = total_score + score(a, x)
         total_scoreb = total_scoreb + scoreb(a, x)
     end do
