@@ -57,6 +57,7 @@ program day3a
     end do
     
     101 continue
+    close(unit=1)
 
     print *,total_priority
 
