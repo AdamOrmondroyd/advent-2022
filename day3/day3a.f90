@@ -3,7 +3,6 @@ function priority(item)
     character :: item
     integer :: priority
 
-
     priority = ichar(item)
     if (priority.gt.96) then
         priority = priority - 96
@@ -32,7 +31,6 @@ function appears_twice(left, right)
         end do 
         if (found) exit
     end do
-    ! print *,appears_twice
 
 end function
 
@@ -55,10 +53,6 @@ program day3a
         rucksack = trim(buffer)
         left = rucksack(1:len(rucksack)/2)
         right = rucksack(len(rucksack)/2+1:len(rucksack))
-        print *,left
-        print *,right
-        print *,appears_twice(left, right)
-        print *,priority(appears_twice(left,right))
         total_priority = total_priority + priority(appears_twice(left,right))
     end do
     

@@ -69,11 +69,6 @@ program day3b
         b = trim(buffer)
         read(1,*,end=101)buffer
         c = trim(buffer)
-        print *,a
-        print *,b
-        print *,c
-        print *,appears_thrice(a, b, c)
-        print *,priority(appears_thrice(a, b, c))
         total_priority = total_priority + priority(appears_thrice(a,b,c))
     end do
     
