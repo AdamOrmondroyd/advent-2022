@@ -9,15 +9,10 @@ with open("input.txt", 'r') as f:
     lines = f.readlines()
     for line in lines:
         line = line.strip()
-        print(line)
         left = set(line[:len(line)//2])
         right = set(line[len(line)//2:])
 
-        intersection = left.intersection(right)
-        i = intersection.pop()
-        print(i)
-        print(priority(i))
-        total += priority(i)
+        total += priority(left.intersection(right).pop())
         
 print(total)
 
