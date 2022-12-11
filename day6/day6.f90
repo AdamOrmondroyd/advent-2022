@@ -18,7 +18,7 @@ logical function repeats(str) result (bar)
 end function repeats
 
 
-program day6a
+program day6
 
     implicit none
     character(len=8192) :: buffer
@@ -26,7 +26,8 @@ program day6a
     logical repeats
     integer packet_length
 
-    packet_length = 4
+    ! packet_length = 4
+    packet_length = 14
 
     open(unit=1,file="input.txt")
     read(1, *) buffer
@@ -40,4 +41,4 @@ program day6a
 
     
 
-end program day6a
+end program day6
