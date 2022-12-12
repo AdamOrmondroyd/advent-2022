@@ -9,12 +9,26 @@ subroutine space_to_comma(str)
     end do
 end subroutine
 
-logical function move_tail(head, tail)
+subroutine move_tail(head, tail)
     implicit none
-    integer, dimension(2), intent(in) :: head, tail
-    move_tail = .false.
-    if (any(abs(head-tail).ge.2)) move_tail = .true.
-end function
+    integer, dimension(2) :: head, tail
+    integer :: i
+    if (any(abs(head-tail).ge.2)) then
+        ! I think this case is contained within how I've done diagonal??
+        ! if any(head==tail) then 
+            ! tail = (head + tail) / 2
+        ! else 
+        do i = 1, 2
+            if (head(i).gt.tail(i)) then
+                tail(i) = tail(i) + 1
+            else if (head(i).lt.tail(i)) then
+                tail(i) = tail(i) - 1
+            end if
+        end do 
+        ! end if
+
+    end if
+end subroutine
 
 subroutine move_head(head, direction)
     implicit none
@@ -33,47 +47,38 @@ subroutine move_head(head, direction)
 end subroutine
 
 
-program day8a
+program day9
 
     implicit none
-    integer, dimension(2) :: head
-    integer, dimension(2) :: tail
-    integer, dimension(2) :: old_head
+    integer, dimension(2, 10) :: knots
     logical, dimension(1024, 1024) :: visited
     character :: direction
     integer :: distance
     integer :: i
-    logical move_tail
+    integer :: ii
+
+    
 
     visited = .false.
-    head = 512
-    tail = head
+    knots= 512
 
-    visited(tail(1), tail(2)) = .true.
+    visited(knots(1,10), knots(2,10)) = .true.
     
 
     open(unit=1,file="input.txt")
     do
         read(1, *, end=101)direction, distance
-        print *, direction, distance
-        do i=1, distance
-            old_head = head
-            call move_head(head, direction)
-            print *, "moved head"
-            if(move_tail(head,tail)) then
-                tail = old_head
-                print *,"about to log visited"
-                visited(tail(1),tail(2)) = .true.
-                print *,"logged visited"
-            end if
+        do ii=1, distance
+            call move_head(knots(:, 1), direction)
+            do i=2, size(knots, 2)
+                call move_tail(knots(:,i-1),knots(:,i))
+            end do 
+            visited(knots(1,10),knots(2,10)) = .true.
         end do
-        
     end do
     101 continue
     close(1)
 
     print *,count(visited)
-
     
-
-end program day8a
+end program day9
