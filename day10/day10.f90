@@ -17,7 +17,7 @@ subroutine crt(x, counter, screen)
     row = (counter-1)/40+1
 
     ! this is a mess, because the problem uses 0-indexing to relate x to the screen position
-    if ((x-1.eq.screen_position).or.(x.eq.screen_position).or.(x+1.eq.screen_position)) then
+    if ((x-1.le.screen_position).and.(x+1.ge.screen_position)) then
         screen(row, screen_position+1) = '#'
     end if
         
