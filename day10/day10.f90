@@ -15,10 +15,8 @@ subroutine crt(x, counter, screen)
 
     screen_position = modulo(counter-1,40) + 1
     row = (counter-1)/40+1
-    print *,screen_position, row
 
-
-    ! if (x.ge.(screen_position-1).and.x.le.(screen_position+1)) then
+    ! this is a mess, because the problem uses 0-indexing to relate x to the screen position
     if ((x-1.eq.screen_position-1).or.(x.eq.screen_position-1).or.(x+1.eq.screen_position-1)) then
         screen(row, screen_position) = '#'
     end if
@@ -48,7 +46,6 @@ program day10a
     read(1,'(A)',end=101) buffer
         if (len_trim(buffer).gt.4) then
             read(buffer,*)opcode,v
-            print *,opcode, v
 
             call crt(x, counter, screen)
             call cycle(x, counter, output)
@@ -58,7 +55,6 @@ program day10a
             x = x + v
 
         else
-            print *,buffer
             call crt(x, counter, screen)
             call cycle(x, counter, output)
         end if
