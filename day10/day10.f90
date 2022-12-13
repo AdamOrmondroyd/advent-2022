@@ -6,6 +6,24 @@ subroutine cycle(x, counter, output)
     counter = counter + 1
 end subroutine
 
+subroutine crt(x, counter, screen)
+    implicit none
+    integer :: x, counter
+    character, dimension(6,40) :: screen
+    integer :: screen_position
+    integer :: row
+
+    screen_position = modulo(counter-1,40) + 1
+    row = (counter-1)/40+1
+    print *,screen_position, row
+
+
+    ! if (x.ge.(screen_position-1).and.x.le.(screen_position+1)) then
+    if ((x-1.eq.screen_position-1).or.(x.eq.screen_position-1).or.(x+1.eq.screen_position-1)) then
+        screen(row, screen_position) = '#'
+    end if
+        
+end subroutine
 
 
 program day10a
@@ -17,9 +35,12 @@ program day10a
     character(len=4) :: opcode
     integer :: counter
     integer :: output
+    character, dimension(6, 40) :: screen
+    integer :: i
 
     counter = 1
     output = 0
+    screen = '.'
 
     
     open(unit=1,file="input.txt")
@@ -29,13 +50,16 @@ program day10a
             read(buffer,*)opcode,v
             print *,opcode, v
 
+            call crt(x, counter, screen)
             call cycle(x, counter, output)
+            call crt(x, counter, screen)
             call cycle(x, counter, output)
             
             x = x + v
 
         else
             print *,buffer
+            call crt(x, counter, screen)
             call cycle(x, counter, output)
         end if
     end do
@@ -43,4 +67,7 @@ program day10a
     close(1)
 
     print *,output
+    do i = 1, 6
+        print *, screen(i,:)
+    end do
 end program
