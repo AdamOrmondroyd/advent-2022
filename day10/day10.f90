@@ -43,7 +43,7 @@ program day10a
     
     open(unit=1,file="input.txt")
     do
-    read(1,'(A)',end=101) buffer
+        read(1,'(A)',end=101) buffer
         if (len_trim(buffer).gt.4) then
             read(buffer,*)opcode,v
 
