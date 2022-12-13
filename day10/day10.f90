@@ -13,12 +13,12 @@ subroutine crt(x, counter, screen)
     integer :: screen_position
     integer :: row
 
-    screen_position = modulo(counter-1,40) + 1
+    screen_position = modulo(counter-1,40)
     row = (counter-1)/40+1
 
     ! this is a mess, because the problem uses 0-indexing to relate x to the screen position
-    if ((x-1.eq.screen_position-1).or.(x.eq.screen_position-1).or.(x+1.eq.screen_position-1)) then
-        screen(row, screen_position) = '#'
+    if ((x-1.eq.screen_position).or.(x.eq.screen_position).or.(x+1.eq.screen_position)) then
+        screen(row, screen_position+1) = '#'
     end if
         
 end subroutine
