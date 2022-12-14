@@ -79,6 +79,84 @@ subroutine day14a(minx, maxx, miny, maxy)
 
 end subroutine
 
+subroutine day14b(minx, maxx, miny, maxy)
+    implicit none
+    integer :: minx, maxx, miny, maxy
+    integer :: leftx, lefty, rightx, righty
+    integer :: x, y
+    integer :: i
+    logical, allocatable, dimension(:,:) :: sand
+    integer :: result_b
+    character(len=1024) :: buffer
+
+    ! have to make it A LOT wider to allow spillage to the side
+    allocate(sand(minx-10000:maxx+10000, miny:maxy+2))
+    sand = .false.
+    sand(:,maxy+2) = .true.
+
+    open(unit=1,file="input.txt")
+    do
+        read(1,'(A)',end=101)buffer
+        print *,trim(buffer)
+        read(buffer, *, end=102)leftx, lefty
+        call cut(buffer)
+        do
+            read(buffer, *, end=102)rightx,righty
+            call cut(buffer)
+            if(lefty.eq.righty) then ! horizontal
+                ! have to check slice direction
+                if (leftx.le.rightx) then
+                    sand(leftx:rightx, lefty) = .true.
+                else
+                    sand(rightx:leftx, lefty) = .true.
+                end if
+            else ! vertical
+                ! have to check slice direction
+                if(lefty.le.righty) then
+                    sand(leftx,lefty:righty) = .true.
+                else
+                    sand(leftx,righty:lefty) = .true.
+                end if
+            end if
+
+            leftx = rightx
+            lefty = righty
+        end do
+        102 continue
+    end do
+    101 continue
+    close(1)
+
+    do i=miny, maxy
+        print *,sand(:,i)
+    end do
+     
+    result_b = 0
+    x = 500
+    y = 0
+    do
+        if(.not.sand(x,y+1)) then
+            y = y+1
+        else if(.not.sand(x-1,y+1)) then
+            x = x-1
+            y = y+1
+        else if(.not.sand(x+1,y+1)) then
+            x = x+1
+            y = y+1
+        else
+            sand(x,y) = .true. 
+            result_b = result_b+1
+            if (x.eq.500.and.y.eq.0) exit
+
+            x = 500
+            y = 0
+        end if
+        print *,x,y
+    end do
+    print *,result_b
+
+end subroutine
+
 subroutine cut(str)
     implicit none
     character(len=1024) :: str
@@ -124,5 +202,6 @@ program day14
     103 continue
     close(1)
     print *,minx, maxx, miny, maxy
-    call day14a(minx,maxx,miny,maxy)
+    ! call day14a(minx,maxx,miny,maxy)
+    call day14b(minx,maxx,miny,maxy)
 end program day14
