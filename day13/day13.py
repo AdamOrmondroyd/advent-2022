@@ -55,23 +55,19 @@ while lines_a:
 print(result)
 
 # part II
+# just need to see if each packet appears before or after each divider
+two = 1
+six = 2
+two_divider = [[2]]
+six_divider = [[6]]
 
-lines.append([[2]])
-lines.append([[6]])
+for line in lines:
+    if compare(line, six_divider) == 1:
+        six += 1
+    if compare(line, two_divider) == 1:
+        two += 1
+print("quicker")
 
-# just do bubblesort 
-for ii in range(len(lines), 1, -1):
-    for i in range(ii-1):
-        print(i)
-        if compare(lines[i], lines[i+1]) == -1:
-            lines[i], lines[i+1] = lines[i+1], lines[i]
-
-print("-------------------------------------------------------------")
-for i, line in enumerate(lines, start=1):
-    print(line)
-    if line == [[2]]: two = i
-    if line == [[6]]: six = i
-    
 print("-------------------------------------------------------------")
 print(two*six)
 
