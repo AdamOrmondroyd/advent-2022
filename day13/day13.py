@@ -8,8 +8,6 @@ for i, line in enumerate(lines):
 
 lines = [ast.literal_eval(line) for line in lines if line != ""]
 
-sorted_counter = 0
-
 def compare(left, right):
     if isinstance(left, int) and isinstance(right, int):
         if left < right:
