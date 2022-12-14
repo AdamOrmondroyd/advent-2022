@@ -15,7 +15,6 @@ subroutine day14a(minx, maxx, miny, maxy)
     open(unit=1,file="input.txt")
     do
         read(1,'(A)',end=101)buffer
-        print *,trim(buffer)
         read(buffer, *, end=102)leftx, lefty
         call cut(buffer)
         do
@@ -44,10 +43,6 @@ subroutine day14a(minx, maxx, miny, maxy)
     end do
     101 continue
     close(1)
-
-    do i=miny, maxy
-        print *,sand(:,i)
-    end do
 
     result_a = 0
     x = 500
@@ -70,7 +65,7 @@ subroutine day14a(minx, maxx, miny, maxy)
             y = 0
         end if
     end do
-    print *,result_a
+    print *,"part a: ",result_a
 
 end subroutine
 
@@ -92,7 +87,6 @@ subroutine day14b(minx, maxx, miny, maxy)
     open(unit=1,file="input.txt")
     do
         read(1,'(A)',end=101)buffer
-        print *,trim(buffer)
         read(buffer, *, end=102)leftx, lefty
         call cut(buffer)
         do
@@ -122,10 +116,6 @@ subroutine day14b(minx, maxx, miny, maxy)
     101 continue
     close(1)
 
-    do i=miny, maxy
-        print *,sand(:,i)
-    end do
-     
     result_b = 0
     x = 500
     y = 0
@@ -146,9 +136,8 @@ subroutine day14b(minx, maxx, miny, maxy)
             x = 500
             y = 0
         end if
-        print *,x,y
     end do
-    print *,result_b
+    print *,"part b: ",result_b
 
 end subroutine
 
@@ -159,7 +148,6 @@ subroutine cut(str)
     integer :: original_len
 
     original_len = len_trim(str)
-    print *,"len trim", len_trim(str)
     do i=1,len_trim(str)
         if (str(i:i)=='>') then
             str = str(i+2:)
@@ -183,7 +171,6 @@ program day14
     open(unit=1,file="input.txt")
     do
         read(1,'(A)',end=103)buffer
-        print *,trim(buffer)
         do
             read(buffer, *, end=104)x,y
             call cut(buffer)
@@ -196,7 +183,6 @@ program day14
     end do
     103 continue
     close(1)
-    print *,minx, maxx, miny, maxy
-    ! call day14a(minx,maxx,miny,maxy)
+    call day14a(minx,maxx,miny,maxy)
     call day14b(minx,maxx,miny,maxy)
 end program day14
