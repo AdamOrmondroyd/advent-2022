@@ -39,17 +39,40 @@ def compare(left, right):
     
 result = 0
 i = 1
-while lines:
-    left = lines[0]
-    right = lines[1]
 
-    lines = lines[2:]
+lines_a = lines
+while lines_a:
+    left = lines_a[0]
+    right = lines_a[1]
+
+    lines_a = lines_a[2:]
     
     if compare(left, right)==1: result += i
 
-    # print(compare(left,right))
+    print(compare(left,right))
     i += 1
     print("-----------------------------")
 print(result)
+
+# part II
+
+lines.append([[2]])
+lines.append([[6]])
+
+# just do bubblesort 
+for ii in range(len(lines), 1, -1):
+    for i in range(ii-1):
+        print(i)
+        if compare(lines[i], lines[i+1]) == -1:
+            lines[i], lines[i+1] = lines[i+1], lines[i]
+
+print("-------------------------------------------------------------")
+for i, line in enumerate(lines, start=1):
+    print(line)
+    if line == [[2]]: two = i
+    if line == [[6]]: six = i
+    
+print("-------------------------------------------------------------")
+print(two*six)
 
 
