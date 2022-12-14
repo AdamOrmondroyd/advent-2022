@@ -11,10 +11,6 @@ lines = [ast.literal_eval(line) for line in lines if line != ""]
 sorted_counter = 0
 
 def compare(left, right):
-    print(left)
-    print(right)
-    print()
-
     if isinstance(left, int) and isinstance(right, int):
         if left < right:
             return 1
@@ -40,7 +36,7 @@ def compare(left, right):
 result = 0
 i = 1
 
-lines_a = lines
+lines_a = lines # save lines for next part
 while lines_a:
     left = lines_a[0]
     right = lines_a[1]
@@ -49,10 +45,8 @@ while lines_a:
     
     if compare(left, right)==1: result += i
 
-    print(compare(left,right))
     i += 1
-    print("-----------------------------")
-print(result)
+print(f"part a {result}")
 
 # part II
 # just need to see if each packet appears before or after each divider
@@ -66,9 +60,8 @@ for line in lines:
         six += 1
     if compare(line, two_divider) == 1:
         two += 1
-print("quicker")
 
 print("-------------------------------------------------------------")
-print(two*six)
+print(f"part b: {two*six}")
 
 
