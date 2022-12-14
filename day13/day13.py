@@ -54,10 +54,11 @@ two_divider = [[2]]
 six_divider = [[6]]
 
 for line in lines:
-    if compare(line, six_divider) == 1:
-        six += 1
     if compare(line, two_divider) == 1:
         two += 1
+        six += 1
+    elif compare(line, six_divider) == 1:
+        six += 1
 
 print("-------------------------------------------------------------")
 print(f"part b: {two*six}")
