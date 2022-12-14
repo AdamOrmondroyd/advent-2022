@@ -1,8 +1,3 @@
-subroutine falling(minx, maxx, miny, maxy)
-    implicit none
-    integer :: minx, maxx, miny, maxy
-end subroutine
-
 subroutine day14a(minx, maxx, miny, maxy)
     implicit none
     integer :: minx, maxx, miny, maxy
