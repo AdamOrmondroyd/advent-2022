@@ -82,8 +82,6 @@ program day15
     end do
 
     x(2) = 10
-    print *,minval(sensor_and_beacon(:,1))-maxval(distances)
-    print *,maxval(sensor_and_beacon(:,1))+maxval(distances)
     do ii=minval(sensor_and_beacon(:,1))-maxval(distances),maxval(sensor_and_beacon(:,1))+maxval(distances)
         x(1) = ii
         cannot = .false.
@@ -99,14 +97,11 @@ program day15
 
     print *,"-------------------------------------------------------------------------"
     print *,num_cannot
-    print *,"-------------------------------------------------------------------------"
 
     allocate(sensor(num_sensors,2))
     sensor = sensor_and_beacon(:,1:2)
     do iii=1,num_sensors
         r = distances(iii)+1
-        print *, sensor(iii,:)
-        print *, r
         x(1) = sensor(iii,1)
         x(2) = sensor(iii,2)+r
         do ii = 1, 4*r
@@ -120,7 +115,6 @@ program day15
             else
                 x(2) = x(2) + 1
             end if
-            print *,x
 
             is_distress = .true.
             if (any(x.lt.0).or.any(x.gt.4000000)) then
@@ -141,7 +135,6 @@ program day15
     end do
     print *,"-------------------------------------------------------------------------"
     print *,x
-    print *,4000000*x(1) + x(2)
     print *,"I can't bring myself to change the integer types to allow this calculation"
 
 end program day15
