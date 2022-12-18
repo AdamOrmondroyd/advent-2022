@@ -70,7 +70,7 @@ subroutine day18b(cubes, num_cubes)
 
     x = bottom_corner
     call dfs(x, visited, bottom_corner, top_corner, directions)
-    visited = visited.xor.original_cubes
+    visited = visited.neqv.original_cubes
 
     num_cubes_and_bubbles = 0
     do iii = bottom_corner(1), top_corner(1)
