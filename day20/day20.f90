@@ -25,8 +25,6 @@ subroutine day20b(w, num_lines)
         x(i) = x(i) * 811589153
     end do
 
-    print *,x
-
     do iii=1,10
         do i=0,num_lines-1
             xi = x(i)
@@ -49,8 +47,6 @@ subroutine day20b(w, num_lines)
             y(idx(ii)) = x(ii)
         end do
 
-        ! print *,idx
-        print *,y
 
 
     end do
@@ -58,7 +54,6 @@ subroutine day20b(w, num_lines)
         if (y(i).eq.0) exit
     end do
 
-    print *,"um"
     print *,y(modulo(1000+i,num_lines))+y(modulo(2000+i,num_lines))+y(modulo(3000+i,num_lines))
 
     
@@ -88,11 +83,6 @@ program day20
     end do
     
     close(1)
-
-    print *,x
-    do i=0,num_lines-1
-        print *,wrap(x(i)+i, num_lines)
-    end do
 
     call day20b(x, num_lines)
     

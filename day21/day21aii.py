@@ -4,8 +4,6 @@ d = {}
 
 d = {line[0]: line[1:] for line in lines}
 
-print(d)
-
 def ast(root):
     expression = d[root]
     if len(expression)==1: return expression[0]
