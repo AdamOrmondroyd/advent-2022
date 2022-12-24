@@ -14,37 +14,28 @@ def calc(a, op, b):
     if op == '*': return a*b
     return a//b
 
-print(lines)
+if __name__ == "__main__":
+    while lines:
+        line = lines[0]
+        lines = lines[1:]
+        result = None
+        if len(line) == 2:
+            result = line[1]
+        elif isinstance(line[1], int) and isinstance(line[3], int):
+            result = calc(*line[1:])
 
-while lines:
-    # move around one like a queueueue
+        if not lines:
+            break
 
-    line = lines[0]
-    lines = lines[1:]
-    print(line)
-    result = None
-    if len(line) == 2:
-        result = line[1]
-    elif isinstance(line[1], int) and isinstance(line[3], int):
-        result = calc(*line[1:])
+        if result is not None and lines:
+            for i, _ in enumerate(lines):
+                if len(_) == 2: continue
+                if lines[i][1]==line[0]:
+                    lines[i][1] = result
+                if lines[i][3] == line[0]:
+                    lines[i][3] = result
+        else:
+            lines.append(line)
+
     print(result)
-
-    if result is not None and lines:
-        for i, _ in enumerate(lines):
-            if len(_) == 2: continue
-            if lines[i][1]==line[0]:
-                lines[i][1] = result
-            if lines[i][3] == line[0]:
-                lines[i][3] = result
-    else:
-        lines.append(line)
-
-print(result)
-
-        
-
-
-
-
-
 
