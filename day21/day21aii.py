@@ -1,4 +1,18 @@
-from day21 import lines, calc
+with open("input.txt", 'r') as f:
+    lines = [line.strip().split() for line in f.readlines()]
+
+# formatting preparation
+for i, line in enumerate(lines):
+    lines[i][0] = line[0][:-1]
+    if len(line) == 2:
+        lines[i][1] = int(line[1])
+
+
+def calc(a, op, b):
+    if op == '+': return a+b
+    if op == '-': return a-b
+    if op == '*': return a*b
+    return a//b
 
 d = {}
 
